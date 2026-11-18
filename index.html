@@ -1,1 +1,1728 @@
-index.html
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f5f1">
+
+  <meta name="description" content="رضا بیات، توسعه‌دهنده Python، Django و Django REST Framework. طراحی معماری و پیاده‌سازی سامانه‌های اختصاصی تحت وب، API و نرم‌افزارهای سازمانی.">
+
+  <meta name="author" content="Reza Bayat">
+  <meta name="robots" content="index, follow">
+
+  <title>رضا بیات | توسعه‌دهنده Python، Django و DRF</title>
+
+  <link rel="canonical" href="https://example.com/">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@400;500;600;700;800&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================
+       01. DESIGN TOKENS
+    ========================= */
+
+    :root {
+      color-scheme: light;
+
+      --bg: #f6f5f1;
+      --surface: #ffffff;
+      --surface-soft: #efeee9;
+
+      --text: #22231f;
+      --muted: #777970;
+      --line: #deded5;
+
+      --accent: #c45d38;
+      --accent-soft: #f5e8e1;
+
+      --header: rgba(246,245,241,.92);
+
+      --mono: "DM Mono", monospace;
+      --sans: "DM Sans", sans-serif;
+      --fa: "Vazirmatn", sans-serif;
+
+      --container: 1120px;
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+
+      --bg: #171815;
+      --surface: #20211d;
+      --surface-soft: #292a25;
+
+      --text: #f1f0e9;
+      --muted: #a1a296;
+      --line: #373831;
+
+      --accent: #e28a65;
+      --accent-soft: #352720;
+
+      --header: rgba(23,24,21,.92);
+    }
+
+    /* =========================
+       02. RESET
+    ========================= */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--fa);
+      line-height: 1.9;
+      transition: background .2s, color .2s;
+    }
+
+    body[dir="ltr"] {
+      font-family: var(--sans);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+    }
+
+    img {
+      max-width: 100%;
+    }
+
+    ::selection {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .container {
+      width: min(var(--container), calc(100% - 44px));
+      margin-inline: auto;
+    }
+
+    .mono {
+      font-family: var(--mono);
+      direction: ltr;
+      text-align: left;
+      letter-spacing: .04em;
+    }
+
+    /* =========================
+       03. HEADER
+    ========================= */
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: var(--header);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+
+    .nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -.04em;
+    }
+
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .nav-links a {
+      transition: color .2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .icon-button {
+      min-width: 39px;
+      height: 39px;
+      padding: 0 10px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      color: var(--text);
+      background: var(--surface);
+      font-size: 12px;
+    }
+
+    .icon-button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* =========================
+       04. HERO
+    ========================= */
+
+    .hero {
+      padding: 100px 0 95px;
+      display: grid;
+      grid-template-columns: 1.3fr .7fr;
+      align-items: center;
+      gap: 70px;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font: 12px var(--mono);
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(39px, 6vw, 70px);
+      line-height: 1.4;
+      letter-spacing: -.055em;
+      margin: 0 0 24px;
+      font-weight: 800;
+    }
+
+    h1 span {
+      color: var(--accent);
+    }
+
+    .hero-description {
+      max-width: 650px;
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 2.2;
+    }
+
+    .hero-description strong {
+      color: var(--text);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 11px 22px;
+      border-radius: 7px;
+      font-size: 13px;
+      font-weight: 600;
+      border: 1px solid var(--line);
+      transition: .2s;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+
+    .button-secondary {
+      background: var(--surface);
+    }
+
+    .profile-frame {
+      width: 100%;
+      max-width: 320px;
+      aspect-ratio: 4 / 5;
+      margin-inline: auto;
+      position: relative;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      padding: 10px;
+    }
+
+    .profile-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .profile-label {
+      position: absolute;
+      bottom: -16px;
+      left: -18px;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 9px 15px;
+      font: 11px var(--mono);
+      direction: ltr;
+    }
+
+    /* =========================
+       05. SECTIONS
+    ========================= */
+
+    .section {
+      padding: 85px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 25px;
+      margin-bottom: 40px;
+    }
+
+    .section-number {
+      color: var(--accent);
+      font: 12px var(--mono);
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: clamp(26px, 4vw, 40px);
+      line-height: 1.5;
+      margin: 0;
+      letter-spacing: -.04em;
+    }
+
+    .section-description {
+      color: var(--muted);
+      max-width: 520px;
+      font-size: 13px;
+    }
+
+    /* =========================
+       06. SERVICES
+    ========================= */
+
+    .services {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 14px;
+    }
+
+    .service {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 26px;
+      min-height: 270px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .service-primary {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+    }
+
+    .service-number {
+      font: 11px var(--mono);
+      color: var(--accent);
+      margin-bottom: 25px;
+    }
+
+    .service h3 {
+      font-size: 20px;
+      margin: 0 0 13px;
+      line-height: 1.7;
+    }
+
+    .service p {
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .service-footer {
+      margin-top: auto;
+      padding-top: 25px;
+      font: 10px var(--mono);
+      color: var(--accent);
+      direction: ltr;
+      text-align: left;
+    }
+
+    /* =========================
+       07. CASE STUDIES
+    ========================= */
+
+    .case-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 22px;
+    }
+
+    .case-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      overflow: hidden;
+    }
+
+    .case-visual {
+      min-height: 320px;
+      background: var(--surface-soft);
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .case-info {
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .case-meta {
+      color: var(--accent);
+      font: 11px var(--mono);
+      direction: ltr;
+      text-align: left;
+      margin-bottom: 17px;
+    }
+
+    .case-info h3 {
+      font-size: 23px;
+      line-height: 1.6;
+      margin: 0 0 13px;
+    }
+
+    .case-info > p {
+      color: var(--muted);
+      font-size: 13px;
+      margin: 0 0 20px;
+    }
+
+    .case-details {
+      display: grid;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
+    .case-detail {
+      border-top: 1px solid var(--line);
+      padding-top: 10px;
+    }
+
+    .case-detail strong {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .case-detail span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .case-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 20px;
+    }
+
+    .case-stack span {
+      padding: 5px 9px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font: 10px var(--mono);
+      direction: ltr;
+    }
+
+    .case-status {
+      display: inline-block;
+      width: fit-content;
+      margin-top: 20px;
+      padding: 5px 10px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 10px;
+    }
+
+    /* =========================
+       08. SYSTEM PREVIEW
+    ========================= */
+
+    .system-preview {
+      width: 100%;
+      max-width: 430px;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      direction: ltr;
+      font-family: var(--sans);
+    }
+
+    .preview-header {
+      height: 37px;
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 13px;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .preview-layout {
+      display: grid;
+      grid-template-columns: 85px 1fr;
+      min-height: 190px;
+    }
+
+    .preview-sidebar {
+      background: var(--surface-soft);
+      padding: 13px 8px;
+      border-right: 1px solid var(--line);
+    }
+
+    .preview-sidebar div {
+      height: 6px;
+      margin-bottom: 13px;
+      background: var(--line);
+      border-radius: 3px;
+    }
+
+    .preview-main {
+      padding: 15px;
+    }
+
+    .preview-main h4 {
+      font-size: 13px;
+      margin: 0 0 14px;
+    }
+
+    .preview-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+    }
+
+    .preview-stat {
+      padding: 10px 7px;
+      background: var(--surface-soft);
+      border: 1px solid var(--line);
+      font-size: 8px;
+      color: var(--muted);
+    }
+
+    .preview-stat strong {
+      display: block;
+      color: var(--accent);
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+
+    .preview-table {
+      margin-top: 12px;
+      border: 1px solid var(--line);
+    }
+
+    .preview-table div {
+      min-height: 22px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .preview-table div:last-child {
+      border: 0;
+    }
+
+    /* =========================
+       09. TECHNOLOGY STACK
+    ========================= */
+
+    .stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .stack span {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      padding: 9px 15px;
+      font: 11px var(--mono);
+      direction: ltr;
+    }
+
+    /* =========================
+       10. WORKFLOW
+    ========================= */
+
+    .process {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid var(--line);
+    }
+
+    .process-item {
+      padding: 23px;
+      border-inline-end: 1px solid var(--line);
+    }
+
+    .process-item:last-child {
+      border: 0;
+    }
+
+    .process-item .number {
+      font: 12px var(--mono);
+      color: var(--accent);
+    }
+
+    .process-item h3 {
+      font-size: 16px;
+      margin: 17px 0 8px;
+    }
+
+    .process-item p {
+      font-size: 12px;
+      color: var(--muted);
+      margin: 0;
+    }
+
+    /* =========================
+       11. CONTACT
+    ========================= */
+
+    .contact {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      padding: 45px;
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      align-items: center;
+    }
+
+    .contact h2 {
+      max-width: 600px;
+    }
+
+    .contact p {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .social-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(110px, 1fr));
+      gap: 12px 22px;
+      min-width: 260px;
+    }
+
+    .social-links a {
+      font: 11px var(--mono);
+      direction: ltr;
+      text-align: left;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      transition: color .2s;
+    }
+
+    .social-links a:hover {
+      color: var(--accent);
+    }
+
+    /* =========================
+       12. FOOTER
+    ========================= */
+
+    footer {
+      padding: 25px 0;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    /* =========================
+       13. RESPONSIVE
+    ========================= */
+
+    @media (max-width: 850px) {
+      .hero {
+        grid-template-columns: 1fr .7fr;
+        gap: 30px;
+      }
+
+      .services {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .service-primary {
+        grid-column: 1 / -1;
+      }
+
+      .process {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .process-item:nth-child(2) {
+        border-inline-end: 0;
+      }
+
+      .process-item:nth-child(-n+2) {
+        border-bottom: 1px solid var(--line);
+      }
+    }
+
+    @media (max-width: 750px) {
+      .case-card {
+        grid-template-columns: 1fr;
+      }
+
+      .case-visual {
+        min-height: 250px;
+      }
+
+      .case-info {
+        padding: 23px;
+      }
+
+      .case-info h3 {
+        font-size: 20px;
+      }
+    }
+
+    @media (max-width: 650px) {
+      .container {
+        width: min(100% - 30px, var(--container));
+      }
+
+      .nav {
+        min-height: 65px;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 65px 0;
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+
+      .profile-frame {
+        max-width: 220px;
+      }
+
+      .section {
+        padding: 60px 0;
+      }
+
+      .section-heading {
+        display: block;
+      }
+
+      .services,
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .service-primary {
+        grid-column: auto;
+      }
+
+      .process {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .process-item {
+        padding: 15px;
+      }
+
+      .contact {
+        padding: 25px;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .social-links {
+        min-width: 0;
+      }
+
+      .footer-content {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header class="topbar">
+    <div class="container nav">
+
+      <a class="brand" href="#">REZA<span>.</span></a>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#about" data-fa="درباره من" data-en="About">درباره من</a>
+        <a href="#services" data-fa="خدمات" data-en="Services">خدمات</a>
+        <a href="#projects" data-fa="نمونه‌کارها" data-en="Work">نمونه‌کارها</a>
+        <a href="#technology" data-fa="فناوری‌ها" data-en="Technology">فناوری‌ها</a>
+        <a href="#contact" data-fa="تماس" data-en="Contact">تماس</a>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="icon-button" id="languageToggle" aria-label="Change language">EN</button>
+        <button class="icon-button" id="themeToggle" aria-label="Change theme">☾</button>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+
+    <!-- HERO -->
+
+    <section class="container hero" id="about">
+
+      <div>
+
+        <div class="eyebrow mono">PYTHON / DJANGO / DRF</div>
+
+        <h1
+          data-fa="طراحی و توسعه <span>نرم‌افزارهای</span> اختصاصی تحت وب"
+          data-en="Engineering <span>custom</span> web applications">
+          طراحی و توسعه <span>نرم‌افزارهای</span> اختصاصی تحت وب
+        </h1>
+
+        <p class="hero-description"
+           data-fa="من <strong>رضا بیات</strong> هستم؛ توسعه‌دهنده Python با تمرکز بر تحلیل، معماری، طراحی و پیاده‌سازی سامانه‌های اختصاصی با <strong>Django و Django REST Framework (DRF)</strong>. هدفم ساخت محصولات دیجیتال امن، مقیاس‌پذیر و قابل نگهداری است."
+           data-en="I'm <strong>Reza Bayat</strong>, a Python developer focused on analyzing, architecting, designing and building custom web applications with <strong>Django and Django REST Framework (DRF)</strong>. My goal is to deliver secure, scalable and maintainable digital products.">
+          من <strong>رضا بیات</strong> هستم؛ توسعه‌دهنده Python با تمرکز بر تحلیل، معماری، طراحی و پیاده‌سازی سامانه‌های اختصاصی با <strong>Django و Django REST Framework (DRF)</strong>. هدفم ساخت محصولات دیجیتال امن، مقیاس‌پذیر و قابل نگهداری است.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="#contact"
+             data-fa="شروع یک همکاری"
+             data-en="Start a project">
+            شروع یک همکاری
+          </a>
+
+          <a class="button button-secondary" href="#projects"
+             data-fa="مشاهده نمونه‌کارها"
+             data-en="Explore work">
+            مشاهده نمونه‌کارها
+          </a>
+        </div>
+
+      </div>
+
+      <div class="hero-visual">
+        <div class="profile-frame">
+          <img src="assets/profile.jpg"
+               alt="Reza Bayat profile photo"
+               width="600"
+               height="750">
+
+          <div class="profile-label">PYTHON DEVELOPER</div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SERVICES -->
+
+    <section class="section" id="services">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div>
+            <div class="section-number">01 / SERVICES</div>
+            <h2 data-fa="زمینه‌های تخصص و فعالیت"
+                data-en="What I work on">
+              زمینه‌های تخصص و فعالیت
+            </h2>
+          </div>
+
+          <p class="section-description"
+             data-fa="تمرکز اصلی من توسعه نرم‌افزارهای اختصاصی است؛ از تحلیل مسئله تا طراحی معماری و تحویل محصول نهایی."
+             data-en="My primary focus is custom software engineering, from requirements analysis to architecture and delivery.">
+            تمرکز اصلی من توسعه نرم‌افزارهای اختصاصی است؛ از تحلیل مسئله تا طراحی معماری و تحویل محصول نهایی.
+          </p>
+
+        </div>
+
+        <div class="services">
+
+          <article class="service service-primary">
+
+            <div class="service-number">01 — CORE SPECIALTY</div>
+
+            <h3 data-fa="طراحی و توسعه اختصاصی با Django و DRF"
+                data-en="Custom Django & DRF development">
+              طراحی و توسعه اختصاصی با Django و DRF
+            </h3>
+
+            <p
+              data-fa="تحلیل نیازمندی‌ها، طراحی معماری نرم‌افزار، مدل‌سازی داده، توسعه Backend، طراحی REST API، احراز هویت و سطح دسترسی، داشبوردها و سامانه‌های سازمانی."
+              data-en="Requirements analysis, software architecture, data modeling, backend engineering, REST APIs, authentication, authorization, dashboards and business systems.">
+              تحلیل نیازمندی‌ها، طراحی معماری نرم‌افزار، مدل‌سازی داده، توسعه Backend، طراحی REST API، احراز هویت و سطح دسترسی، داشبوردها و سامانه‌های سازمانی.
+            </p>
+
+            <div class="service-footer">
+              ANALYZE · ARCHITECT · ENGINEER
+            </div>
+
+          </article>
+
+          <article class="service">
+
+            <div class="service-number">02 — WORDPRESS</div>
+
+            <h3 data-fa="طراحی سایت با وردپرس"
+                data-en="WordPress website design">
+              طراحی سایت با وردپرس
+            </h3>
+
+            <p
+              data-fa="طراحی و پیاده‌سازی سایت‌های شرکتی، شخصی، فروشگاهی و محتوایی با توجه به تجربه کاربری، سرعت و اصول SEO."
+              data-en="Business, personal, e-commerce and content websites with attention to usability, performance and SEO.">
+              طراحی و پیاده‌سازی سایت‌های شرکتی، شخصی، فروشگاهی و محتوایی با توجه به تجربه کاربری، سرعت و اصول SEO.
+            </p>
+
+            <div class="service-footer">
+              DESIGN · BUILD · LAUNCH
+            </div>
+
+          </article>
+
+          <article class="service">
+
+            <div class="service-number">03 — EDUCATION</div>
+
+            <h3 data-fa="آموزش برنامه‌نویسی و طراحی وب"
+                data-en="Programming & web development education">
+              آموزش برنامه‌نویسی و طراحی وب
+            </h3>
+
+            <p
+              data-fa="آموزش کاربردی Python، Django، طراحی وب و مفاهیم توسعه نرم‌افزار با رویکرد پروژه‌محور."
+              data-en="Practical, project-based learning in Python, Django, web design and software development.">
+              آموزش کاربردی Python، Django، طراحی وب و مفاهیم توسعه نرم‌افزار با رویکرد پروژه‌محور.
+            </p>
+
+            <div class="service-footer">
+              LEARN · PRACTICE · BUILD
+            </div>
+
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- DJANGO CASE STUDIES -->
+
+    <section class="section" id="projects">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div>
+            <div class="section-number">02 / DJANGO CASE STUDIES</div>
+
+            <h2 data-fa="مطالعات موردی توسعه نرم‌افزار"
+                data-en="Software engineering case studies">
+              مطالعات موردی توسعه نرم‌افزار
+            </h2>
+          </div>
+
+          <p class="section-description"
+             data-fa="تمرکز این بخش بر توانایی تحلیل مسئله، طراحی معماری و پیاده‌سازی سامانه‌های اختصاصی با Django و DRF است."
+             data-en="These case studies demonstrate my approach to analyzing requirements, designing architecture and engineering custom applications with Django and DRF.">
+            تمرکز این بخش بر توانایی تحلیل مسئله، طراحی معماری و پیاده‌سازی سامانه‌های اختصاصی با Django و DRF است.
+          </p>
+
+        </div>
+
+        <div class="case-grid">
+
+          <!-- CASE 01 -->
+
+          <article class="case-card">
+
+            <div class="case-visual">
+
+              <div class="system-preview">
+
+                <div class="preview-header">
+                  <span>IT ASSET MANAGEMENT</span>
+                  <span>ADMIN PANEL</span>
+                </div>
+
+                <div class="preview-layout">
+
+                  <div class="preview-sidebar">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+
+                  <div class="preview-main">
+
+                    <h4>Asset Overview</h4>
+
+                    <div class="preview-stats">
+
+                      <div class="preview-stat">
+                        <strong>128</strong>
+                        Assets
+                      </div>
+
+                      <div class="preview-stat">
+                        <strong>24</strong>
+                        Employees
+                      </div>
+
+                      <div class="preview-stat">
+                        <strong>08</strong>
+                        Repairs
+                      </div>
+
+                    </div>
+
+                    <div class="preview-table">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="case-info">
+
+              <div class="case-meta">
+                CASE STUDY 01 / DJANGO
+              </div>
+
+              <h3
+                data-fa="سامانه مدیریت دارایی‌های فناوری اطلاعات"
+                data-en="IT Asset Management System">
+                سامانه مدیریت دارایی‌های فناوری اطلاعات
+              </h3>
+
+              <p
+                data-fa="طراحی یک سامانه سازمانی برای مدیریت تجهیزات کامپیوتری، تخصیص دارایی‌ها، سوابق جابه‌جایی، تعمیرات و ساختار سازمانی."
+                data-en="A business system concept for managing IT equipment, asset assignments, movement history, maintenance and organizational structures.">
+                طراحی یک سامانه سازمانی برای مدیریت تجهیزات کامپیوتری، تخصیص دارایی‌ها، سوابق جابه‌جایی، تعمیرات و ساختار سازمانی.
+              </p>
+
+              <div class="case-details">
+
+                <div class="case-detail">
+                  <strong data-fa="چالش فنی"
+                          data-en="Engineering challenge">
+                    چالش فنی
+                  </strong>
+
+                  <span
+                    data-fa="مدیریت روابط بین تجهیزات، کارکنان، واحدها، مکان‌ها و تاریخچه عملیات بدون از دست رفتن سوابق."
+                    data-en="Managing relationships between assets, employees, departments, locations and historical operations.">
+                    مدیریت روابط بین تجهیزات، کارکنان، واحدها، مکان‌ها و تاریخچه عملیات بدون از دست رفتن سوابق.
+                  </span>
+                </div>
+
+                <div class="case-detail">
+                  <strong data-fa="راهکار معماری"
+                          data-en="Architecture approach">
+                    راهکار معماری
+                  </strong>
+
+                  <span
+                    data-fa="طراحی مدل‌های دامنه، Service Layer، تراکنش‌های پایگاه داده و محدودیت‌های یکپارچگی."
+                    data-en="Domain modeling, service layer, database transactions and integrity constraints.">
+                    طراحی مدل‌های دامنه، Service Layer، تراکنش‌های پایگاه داده و محدودیت‌های یکپارچگی.
+                  </span>
+                </div>
+
+                <div class="case-detail">
+                  <strong data-fa="قابلیت‌های کلیدی"
+                          data-en="Core capabilities">
+                    قابلیت‌های کلیدی
+                  </strong>
+
+                  <span
+                    data-fa="مدیریت دارایی، تخصیص، تاریخچه، تعمیرات، قطعات و گزارش‌های مدیریتی."
+                    data-en="Asset management, assignments, history, maintenance, parts and management reports.">
+                    مدیریت دارایی، تخصیص، تاریخچه، تعمیرات، قطعات و گزارش‌های مدیریتی.
+                  </span>
+                </div>
+
+              </div>
+
+              <div class="case-stack">
+                <span>Python</span>
+                <span>Django</span>
+                <span>PostgreSQL</span>
+                <span>HTMX</span>
+                <span>Docker</span>
+              </div>
+
+              <div class="case-status"
+                   data-fa="مطالعه موردی مفهومی"
+                   data-en="Concept case study">
+                مطالعه موردی مفهومی
+              </div>
+
+            </div>
+          </article>
+
+          <!-- CASE 02 -->
+
+          <article class="case-card">
+
+            <div class="case-visual">
+
+              <div class="system-preview">
+
+                <div class="preview-header">
+                  <span>REST API PLATFORM</span>
+                  <span>V1 / ENDPOINTS</span>
+                </div>
+
+                <div class="preview-main">
+
+                  <h4>API Resources</h4>
+
+                  <div class="preview-table">
+
+                    <div style="padding:5px 9px;font-size:9px;color:var(--accent)">
+                      GET /api/v1/users/
+                    </div>
+
+                    <div style="padding:5px 9px;font-size:9px">
+                      POST /api/v1/assets/
+                    </div>
+
+                    <div style="padding:5px 9px;font-size:9px">
+                      PATCH /api/v1/requests/1/
+                    </div>
+
+                    <div style="padding:5px 9px;font-size:9px">
+                      DELETE /api/v1/items/1/
+                    </div>
+
+                  </div>
+
+                  <div class="preview-stats" style="margin-top:12px">
+
+                    <div class="preview-stat">
+                      <strong>JWT</strong>
+                      Auth
+                    </div>
+
+                    <div class="preview-stat">
+                      <strong>RBAC</strong>
+                      Access
+                    </div>
+
+                    <div class="preview-stat">
+                      <strong>JSON</strong>
+                      Response
+                    </div>
+
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="case-info">
+
+              <div class="case-meta">
+                CASE STUDY 02 / REST API
+              </div>
+
+              <h3
+                data-fa="طراحی و توسعه پلتفرم REST API"
+                data-en="REST API platform engineering">
+                طراحی و توسعه پلتفرم REST API
+              </h3>
+
+              <p
+                data-fa="طراحی Backend و API برای ارتباط امن و استاندارد بین وب‌اپلیکیشن‌ها، سرویس‌ها و سامانه‌های خارجی."
+                data-en="A backend and API architecture concept for secure communication between web applications, services and external systems.">
+                طراحی Backend و API برای ارتباط امن و استاندارد بین وب‌اپلیکیشن‌ها، سرویس‌ها و سامانه‌های خارجی.
+              </p>
+
+              <div class="case-details">
+
+                <div class="case-detail">
+                  <strong data-fa="چالش فنی"
+                          data-en="Engineering challenge">
+                    چالش فنی
+                  </strong>
+
+                  <span
+                    data-fa="طراحی API قابل توسعه با قراردادهای مشخص، اعتبارسنجی ورودی و کنترل دسترسی دقیق."
+                    data-en="Designing extensible APIs with clear contracts, input validation and precise access control.">
+                    طراحی API قابل توسعه با قراردادهای مشخص، اعتبارسنجی ورودی و کنترل دسترسی دقیق.
+                  </span>
+                </div>
+
+                <div class="case-detail">
+                  <strong data-fa="راهکار معماری"
+                          data-en="Architecture approach">
+                    راهکار معماری
+                  </strong>
+
+                  <span
+                    data-fa="استفاده از Serializer، ViewSet، Permission، Versioning و ساختار لایه‌ای برای منطق کسب‌وکار."
+                    data-en="Using serializers, viewsets, permissions, versioning and layered business logic.">
+                    استفاده از Serializer، ViewSet، Permission، Versioning و ساختار لایه‌ای برای منطق کسب‌وکار.
+                  </span>
+                </div>
+
+                <div class="case-detail">
+                  <strong data-fa="قابلیت‌های کلیدی"
+                          data-en="Core capabilities">
+                    قابلیت‌های کلیدی
+                  </strong>
+
+                  <span
+                    data-fa="احراز هویت، مجوزها، Pagination، Filtering، مستندسازی و تست API."
+                    data-en="Authentication, permissions, pagination, filtering, API documentation and testing.">
+                    احراز هویت، مجوزها، Pagination، Filtering، مستندسازی و تست API.
+                  </span>
+                </div>
+
+              </div>
+
+              <div class="case-stack">
+                <span>Python</span>
+                <span>Django REST Framework</span>
+                <span>JWT</span>
+                <span>PostgreSQL</span>
+                <span>Pytest</span>
+              </div>
+
+              <div class="case-status"
+                   data-fa="مطالعه موردی مفهومی"
+                   data-en="Concept case study">
+                مطالعه موردی مفهومی
+              </div>
+
+            </div>
+          </article>
+
+          <!-- CASE 03 -->
+
+          <article class="case-card">
+
+            <div class="case-visual">
+
+              <div class="system-preview">
+
+                <div class="preview-header">
+                  <span>OPERATIONS DASHBOARD</span>
+                  <span>OVERVIEW</span>
+                </div>
+
+                <div class="preview-main">
+
+                  <h4>Management Overview</h4>
+
+                  <div class="preview-stats">
+
+                    <div class="preview-stat">
+                      <strong>84%</strong>
+                      Progress
+                    </div>
+
+                    <div class="preview-stat">
+                      <strong>32</strong>
+                      Tasks
+                    </div>
+
+                    <div class="preview-stat">
+                      <strong>12</strong>
+                      Users
+                    </div>
+
+                  </div>
+
+                  <div class="preview-table">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="case-info">
+
+              <div class="case-meta">
+                CASE STUDY 03 / BUSINESS APPLICATION
+              </div>
+
+              <h3
+                data-fa="داشبورد مدیریتی و سامانه عملیاتی"
+                data-en="Management dashboard & business application">
+                داشبورد مدیریتی و سامانه عملیاتی
+              </h3>
+
+              <p
+                data-fa="طراحی یک اپلیکیشن تحت وب برای مدیریت اطلاعات، کاربران، فرایندهای سازمانی و ارائه گزارش‌های قابل استفاده برای مدیران."
+                data-en="A web application concept for managing information, users, business workflows and actionable management reports.">
+                طراحی یک اپلیکیشن تحت وب برای مدیریت اطلاعات، کاربران، فرایندهای سازمانی و ارائه گزارش‌های قابل استفاده برای مدیران.
+              </p>
+
+              <div class="case-details">
+
+                <div class="case-detail">
+                  <strong data-fa="چالش فنی"
+                          data-en="Engineering challenge">
+                    چالش فنی
+                  </strong>
+
+                  <span
+                    data-fa="ارائه رابط کاربری سریع برای عملیات پرتکرار و مدیریت داده‌های مرتبط."
+                    data-en="Building a responsive interface for frequent operations and related business data.">
+                    ارائه رابط کاربری سریع برای عملیات پرتکرار و مدیریت داده‌های مرتبط.
+                  </span>
+                </div>
+
+                <div class="case-detail">
+                  <strong data-fa="راهکار معماری"
+                          data-en="Architecture approach">
+                    راهکار معماری
+                  </strong>
+
+                  <span
+                    data-fa="استفاده از Django برای Backend و HTMX و Alpine.js برای تعاملات سبک و تدریجی."
+                    data-en="Using Django for the backend and HTMX with Alpine.js for lightweight progressive interactions.">
+                    استفاده از Django برای Backend و HTMX و Alpine.js برای تعاملات سبک و تدریجی.
+                  </span>
+                </div>
+
+                <div class="case-detail">
+                  <strong data-fa="قابلیت‌های کلیدی"
+                          data-en="Core capabilities">
+                    قابلیت‌های کلیدی
+                  </strong>
+
+                  <span
+                    data-fa="داشبورد، فیلتر و جستجو، مدیریت کاربران، گزارش‌گیری و کنترل سطح دسترسی."
+                    data-en="Dashboards, filtering, search, user management, reporting and access control.">
+                    داشبورد، فیلتر و جستجو، مدیریت کاربران، گزارش‌گیری و کنترل سطح دسترسی.
+                  </span>
+                </div>
+
+              </div>
+
+              <div class="case-stack">
+                <span>Django</span>
+                <span>HTMX</span>
+                <span>Alpine.js</span>
+                <span>Tailwind CSS</span>
+                <span>PostgreSQL</span>
+              </div>
+
+              <div class="case-status"
+                   data-fa="مطالعه موردی مفهومی"
+                   data-en="Concept case study">
+                مطالعه موردی مفهومی
+              </div>
+
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNOLOGIES -->
+
+    <section class="section" id="technology">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div>
+            <div class="section-number">03 / TECHNOLOGY</div>
+
+            <h2 data-fa="ابزارها و فناوری‌ها"
+                data-en="Tools & technologies">
+              ابزارها و فناوری‌ها
+            </h2>
+          </div>
+
+        </div>
+
+        <div class="stack">
+          <span>Python</span>
+          <span>Django</span>
+          <span>Django REST Framework</span>
+          <span>PostgreSQL</span>
+          <span>Redis</span>
+          <span>Celery</span>
+          <span>Docker</span>
+          <span>Git</span>
+          <span>GitHub</span>
+          <span>Linux</span>
+          <span>HTML5</span>
+          <span>CSS3</span>
+          <span>Tailwind CSS</span>
+          <span>HTMX</span>
+          <span>Alpine.js</span>
+          <span>SEO</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- WORKFLOW -->
+
+    <section class="section" id="workflow">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div>
+            <div class="section-number">04 / WORKFLOW</div>
+
+            <h2 data-fa="فرایند انجام پروژه"
+                data-en="How I work">
+              فرایند انجام پروژه
+            </h2>
+          </div>
+
+        </div>
+
+        <div class="process">
+
+          <article class="process-item">
+            <div class="number">01</div>
+
+            <h3 data-fa="تحلیل نیازمندی"
+                data-en="Discovery">
+              تحلیل نیازمندی
+            </h3>
+
+            <p data-fa="شناخت مسئله، نیازهای کاربران و محدوده پروژه."
+               data-en="Understanding the problem, users and project scope.">
+              شناخت مسئله، نیازهای کاربران و محدوده پروژه.
+            </p>
+          </article>
+
+          <article class="process-item">
+            <div class="number">02</div>
+
+            <h3 data-fa="طراحی معماری"
+                data-en="Architecture">
+              طراحی معماری
+            </h3>
+
+            <p data-fa="طراحی مدل داده، ساختار نرم‌افزار و API."
+               data-en="Designing data models, software structure and APIs.">
+              طراحی مدل داده، ساختار نرم‌افزار و API.
+            </p>
+          </article>
+
+          <article class="process-item">
+            <div class="number">03</div>
+
+            <h3 data-fa="توسعه و تست"
+                data-en="Development">
+              توسعه و تست
+            </h3>
+
+            <p data-fa="پیاده‌سازی، تست، بررسی امنیت و کیفیت."
+               data-en="Implementation, testing, security and quality checks.">
+              پیاده‌سازی، تست، بررسی امنیت و کیفیت.
+            </p>
+          </article>
+
+          <article class="process-item">
+            <div class="number">04</div>
+
+            <h3 data-fa="استقرار و پشتیبانی"
+                data-en="Delivery">
+              استقرار و پشتیبانی
+            </h3>
+
+            <p data-fa="استقرار محصول و آماده‌سازی برای نگهداری."
+               data-en="Deployment and preparation for maintenance.">
+              استقرار محصول و آماده‌سازی برای نگهداری.
+            </p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+
+    <section class="section" id="contact">
+
+      <div class="container">
+
+        <div class="contact">
+
+          <div>
+
+            <div class="section-number">05 / GET IN TOUCH</div>
+
+            <h2 data-fa="برای توسعه یک محصول اختصاصی آماده‌اید؟"
+                data-en="Have an idea for a custom web product?">
+              برای توسعه یک محصول اختصاصی آماده‌اید؟
+            </h2>
+
+            <p data-fa="درباره ایده، نیازمندی‌ها و مسیر فنی پروژه گفتگو کنیم."
+               data-en="Let's discuss your idea, requirements and technical approach.">
+              درباره ایده، نیازمندی‌ها و مسیر فنی پروژه گفتگو کنیم.
+            </p>
+
+          </div>
+
+          <div class="social-links">
+
+            <!-- Replace these URLs with your actual profiles -->
+
+            <a href="https://github.com/reza-bayat"
+               target="_blank"
+               rel="noopener noreferrer">
+              GITHUB ↗
+            </a>
+
+            <a href="https://www.linkedin.com/in/your-username/"
+               target="_blank"
+               rel="noopener noreferrer">
+              LINKEDIN ↗
+            </a>
+
+            <a href="https://www.instagram.com/your-username/"
+               target="_blank"
+               rel="noopener noreferrer">
+              INSTAGRAM ↗
+            </a>
+
+            <a href="https://t.me/your-username"
+               target="_blank"
+               rel="noopener noreferrer">
+              TELEGRAM ↗
+            </a>
+
+            <a href="https://x.com/your-username"
+               target="_blank"
+               rel="noopener noreferrer">
+              X / TWITTER ↗
+            </a>
+
+            <a href="mailto:your-email@example.com">
+              EMAIL ↗
+            </a>
+
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+
+  <footer>
+    <div class="container footer-content">
+
+      <span>
+        © 2026 — Reza Bayat. All rights reserved.
+      </span>
+
+      <span class="mono">
+        BUILT WITH PYTHON MINDSET.
+      </span>
+
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT -->
+
+  <script>
+    (() => {
+      "use strict";
+
+      const root = document.documentElement;
+
+      const languageButton =
+        document.getElementById("languageToggle");
+
+      const themeButton =
+        document.getElementById("themeToggle");
+
+      const supportedLanguages = ["fa", "en"];
+
+      function getStoredValue(key, fallback) {
+        try {
+          return localStorage.getItem(key) || fallback;
+        } catch {
+          return fallback;
+        }
+      }
+
+      function storeValue(key, value) {
+        try {
+          localStorage.setItem(key, value);
+        } catch {
+          // Continue without persistent preferences.
+        }
+      }
+
+      let language = getStoredValue("site-language", "fa");
+      let theme = getStoredValue("site-theme", "light");
+
+      if (!supportedLanguages.includes(language)) {
+        language = "fa";
+      }
+
+      if (!["light", "dark"].includes(theme)) {
+        theme = "light";
+      }
+
+      function setLanguage(value) {
+        if (!supportedLanguages.includes(value)) {
+          return;
+        }
+
+        language = value;
+
+        const isPersian = value === "fa";
+        const direction = isPersian ? "rtl" : "ltr";
+
+        root.lang = value;
+        root.dir = direction;
+
+        document.body.dir = direction;
+
+        document.querySelectorAll("[data-fa][data-en]").forEach(element => {
+          element.innerHTML = element.dataset[value];
+        });
+
+        languageButton.textContent =
+          isPersian ? "EN" : "FA";
+
+        document.title = isPersian
+          ? "رضا بیات | توسعه‌دهنده Python، Django و DRF"
+          : "Reza Bayat | Python, Django & DRF Developer";
+
+        storeValue("site-language", value);
+      }
+
+      function setTheme(value) {
+        if (!["light", "dark"].includes(value)) {
+          return;
+        }
+
+        theme = value;
+
+        root.dataset.theme = value;
+
+        themeButton.textContent =
+          value === "dark" ? "☀" : "☾";
+
+        themeButton.setAttribute(
+          "aria-label",
+          value === "dark"
+            ? "Switch to light theme"
+            : "Switch to dark theme"
+        );
+
+        storeValue("site-theme", value);
+      }
+
+      languageButton.addEventListener("click", () => {
+        setLanguage(language === "fa" ? "en" : "fa");
+      });
+
+      themeButton.addEventListener("click", () => {
+        setTheme(theme === "light" ? "dark" : "light");
+      });
+
+      setLanguage(language);
+      setTheme(theme);
+
+    })();
+  </script>
+
+</body>
+</html>
