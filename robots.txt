@@ -1,0 +1,5 @@
+
+User-agent: *
+Allow: /
+
+Sitemap: https://reza-bayat.github.io/me/sitemap.xml
