@@ -1,94 +1,97 @@
 
 # Reza Bayat — Personal Website
 
-A bilingual personal portfolio website built with HTML, CSS and vanilla JavaScript.
+Personal portfolio website for Reza Bayat.
 
-## Features
+**Live website:**  
+https://reza-bayat.github.io/me/
 
-- Persian and English languages
-- RTL / LTR support
+## Overview
+
+A bilingual personal website built with:
+
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- Responsive design
 - Light and dark themes
-- Vazirmatn Persian typography
-- Responsive editorial design
-- Profile photo placeholder
-- Django and DRF focused portfolio
-- Editable social media links
-- No build tools or JavaScript frameworks
+- Persian (RTL) and English (LTR)
+- SEO metadata and structured data
+- GitHub Pages deployment
 
 ## Project Structure
 
 ```text
-reza-bayat-me/
+me/
 ├── index.html
-├── README.md
-└── assets/
-    ├── profile-placeholder.svg
-    └── profile.jpg
+├── fa/
+│   └── index.html
+├── en/
+│   └── index.html
+├── assets/
+│   ├── css/
+│   │   └── style.css
+│   ├── js/
+│   │   └── main.js
+│   └── images/
+│       ├── profile.webp
+│       └── og-cover.jpg
+├── robots.txt
+├── sitemap.xml
+└── README.md
 ```
 
-## Customize
+## Configuration
 
-### Profile photo
+Before publishing, update:
 
-Place your image in `assets/profile.jpg`.
+1. `YOUR-EMAIL` in both language pages.
+2. `assets/images/profile.webp` with the actual profile photo.
+3. `assets/images/og-cover.jpg` with the social sharing image.
+4. Social media links in both language pages.
+5. Personal information and descriptions where necessary.
 
-Update the image source in `index.html`:
+## Local Preview
 
-```html
-<img src="assets/profile.jpg" alt="Reza Bayat">
-```
-
-### Social media
-
-Find the `social-links` section in `index.html`.
-
-Replace placeholder URLs with your real profiles:
-
-- GitHub
-- LinkedIn
-- Instagram
-- Telegram
-- X
-- Email
-
-### Portfolio projects
-
-The project cards are concept examples, not claims of completed client work.
-
-Replace their titles, descriptions, preview images and links with real projects.
-
-### Personal information
-
-Edit the hero section, services, technology stack and contact text directly in `index.html`.
-
-## Run Locally
-
-Open `index.html` in your browser.
-
-For local development, you can also use:
+Run a local static server from the repository root:
 
 ```bash
 python -m http.server 8000
 ```
 
-Then visit:
+Open:
 
-http://localhost:8000
+- http://localhost:8000/
+- http://localhost:8000/fa/
+- http://localhost:8000/en/
 
-## Deploy with GitHub Pages
+## GitHub Pages Deployment
 
-1. Push the project files to your GitHub repository.
+1. Push the project to the `main` branch.
 2. Open repository Settings.
 3. Navigate to Pages.
 4. Select Deploy from a branch.
 5. Select `main` and `/ (root)`.
-6. Save.
+6. Save the configuration.
 
-Your website will be published through GitHub Pages after deployment completes.
+Website URL:
 
-## Technologies
+https://reza-bayat.github.io/me/
 
-- HTML5
-- CSS3
-- Vanilla JavaScript
-- Google Fonts
+## SEO
+
+The website includes:
+
+- Separate Persian and English URLs.
+- Canonical URLs.
+- Reciprocal hreflang links.
+- Open Graph metadata.
+- Twitter Card metadata.
+- Person, WebSite and ProfilePage structured data.
+- XML sitemap.
+
+## Notes
+
+The showcased projects are conceptual case studies, not claims of completed client work.
+
+Replace all placeholder information before publishing.
